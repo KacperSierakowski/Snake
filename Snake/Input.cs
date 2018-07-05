@@ -28,13 +28,5 @@ namespace Snake
         {//function change state of keys and player with it
             keyTable[key] = state;
         }
-
-
-
-
-
-
-
-
     }
 }

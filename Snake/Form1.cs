@@ -14,10 +14,7 @@ namespace Snake
     {
         private List<Circle> Snake = new List<Circle>();// W Liscie bedzie pprzetrzymywany waz
         private Circle food = new Circle(); // pojedynczym kolkiem bedzie jedzenie weza
-
-
-
-
+        
         public Form1()
         {
             InitializeComponent();
@@ -47,6 +44,11 @@ namespace Snake
 
         private void generatefood()
         {
+            int MaksymalnaPozycjaX = pictureBox1.Size.Width / Settings.Width;
+            int MaksymalnaPozycjaY = pictureBox1.Size.Height / Settings.Height;
+            Random los = new Random();
+            food = new Circle { X = los.Next(0, MaksymalnaPozycjaX), Y = los.Next(0, MaksymalnaPozycjaY) };
+
         }
 
         private void updateScreen(object sender, EventArgs e)
@@ -126,6 +128,25 @@ namespace Snake
                     Snake[i].Y = Snake[i - 1].Y;
                 }
             }
+        }
+
+        private void die()
+        {
+            Settings.GameOver = true;
+        }
+
+        private void eat()
+        {//dodaj ,,cialo,, wezowi
+            Circle cialo = new Circle
+            {
+                X = Snake[Snake.Count - 1].X,
+                Y = Snake[Snake.Count - 1].Y
+            };
+            Snake.Add(cialo);
+            Settings.Score += Settings.Points;
+            label2.Text = Settings.Score.ToString();
+            generatefood();
+
         }
 
         private void label2_Click(object sender, EventArgs e)

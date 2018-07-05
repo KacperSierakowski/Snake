@@ -16,13 +16,5 @@ namespace Snake
             X = 0;
             Y = 0;
         }
-
-
-
-
-
-
-
-
     }
 }

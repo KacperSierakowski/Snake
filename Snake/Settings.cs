@@ -9,10 +9,10 @@ namespace Snake
 
     public enum Directions
     {
-        Left;
-        Right;
-        Up;
-        Down;
+        Left,
+        Right,
+        Up,
+        Down
     };
     class Settings
     {
@@ -34,21 +34,5 @@ namespace Snake
             GameOver = false;
             direction = Directions.Down;// Domyślnym kieruniek węża będzie dół
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     }
 }
