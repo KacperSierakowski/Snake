@@ -18,39 +18,29 @@ namespace Snake
         public Form1()
         {
             InitializeComponent();
-
             new Settings();
-
             gameTimer.Interval = 1000 / Settings.Speed;//,,klatki na sekund,,
             gameTimer.Tick += updateScreen;
             gameTimer.Start();
             startGame();
-
-
-
         }
-
         private void startGame()
         {
             label3.Visible = false;
             new Settings();
             Snake.Clear();
-            Circle glowa = new Circle { X = 10, Y = 4 };
+            Circle glowa = new Circle { X = 10, Y = 2 };
             Snake.Add(glowa);
-
             label2.Text = Settings.Score.ToString();
             generatefood();
         }
-
         private void generatefood()
         {
             int MaksymalnaPozycjaX = pictureBox1.Size.Width / Settings.Width;
             int MaksymalnaPozycjaY = pictureBox1.Size.Height / Settings.Height;
             Random los = new Random();
             food = new Circle { X = los.Next(0, MaksymalnaPozycjaX), Y = los.Next(0, MaksymalnaPozycjaY) };
-
         }
-
         private void updateScreen(object sender, EventArgs e)
         {
             if (Settings.GameOver == true)
@@ -82,7 +72,6 @@ namespace Snake
             }
             pictureBox1.Invalidate();//odswiez picturebox i wgraj grafiki
         }
-
         private void movePlayer()
         {
             for (int i= Snake.Count-1;i>=0;i--)
@@ -108,19 +97,15 @@ namespace Snake
                     //Zakres,zeby waz nie wyszedl poza obszar
                     int MaksymalnaPozycjaX = pictureBox1.Size.Width / Settings.Width;
                     int MaksymalnaPozycjaY = pictureBox1.Size.Height / Settings.Height;
-
                     if (Snake[i].X < 0 || Snake[i].Y < 0 || Snake[i].X > MaksymalnaPozycjaX || Snake[i].Y > MaksymalnaPozycjaY)
                     {
                         die();//zakoncz gre,jesli waz zderzy sie ze sciana
 
                     }
-
                     if(Snake[0].X==food.X && Snake[0].Y == food.Y)//jak glowa dotknie jedzenia
                     {
                         eat();
                     }
-
-
                 }
                 else
                 {
@@ -129,12 +114,10 @@ namespace Snake
                 }
             }
         }
-
         private void die()
         {
             Settings.GameOver = true;
         }
-
         private void eat()
         {//dodaj ,,cialo,, wezowi
             Circle cialo = new Circle
@@ -146,31 +129,25 @@ namespace Snake
             Settings.Score += Settings.Points;
             label2.Text = Settings.Score.ToString();
             generatefood();
-
         }
-
         private void label2_Click(object sender, EventArgs e)
         {
 
         }
-
         private void keyisdown(object sender, KeyEventArgs e)
         {
             Input.changeState(e.KeyCode, true);
         }
-
         private void keyisup(object sender, KeyEventArgs e)
         {
             Input.changeState(e.KeyCode, false);
         }
-
         private void updateGra(object sender, PaintEventArgs e)
         {
             Graphics graphics = e.Graphics;
             if (Settings.GameOver==false)
             {
                 Brush KolorWeza;
-
                 for (int i =0;i<Snake.Count;i++)
                 {
                     if (i==0)
@@ -181,20 +158,16 @@ namespace Snake
                     {//reszta ciala czarna
                         KolorWeza = Brushes.Black;
                     }
-
                     graphics.FillEllipse(KolorWeza, new Rectangle(Snake[i].X * Settings.Width, Snake[i].Y * Settings.Height, Settings.Width, Settings.Height));
                     graphics.FillEllipse(Brushes.Blue, new Rectangle(food.X * Settings.Width, food.Y * Settings.Height, Settings.Width, Settings.Height));
-
                 }
-
             }
             else
             {
                 //Jak koniec gry to komunikat
-                string gameOver = "GAME OVER\n" + "Końcowy wynik: " + Settings.Score + "\n Enter - Nowa Gra\n";
+                string gameOver = "GAME OVER\n" + "\n Enter - Nowa Gra\n";
                 label3.Text = gameOver;
                 label3.Visible = true;
-
             }
         }
     }
